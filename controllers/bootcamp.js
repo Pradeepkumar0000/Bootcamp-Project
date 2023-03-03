@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bootcamp = require("../models/bootcamp");
+// const bootcamp = require("../models/bootcamp");
 const Bootcamp = require("../models/bootcamp");
 const colors = require("colors");
-const bootcamp = require("../models/bootcamp");
+// const bootcamp = require("../models/bootcamp");
 
 
 // @desc     Create new bootcamp
@@ -57,10 +57,12 @@ const getBootcampSingle = (req, res, next) => {
 // @route   PUT /api/v1/bootcamp
 // @access  Private
 const updateBootcamp = (req, res, next) => {
- const bootcamp = bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+ const bootcamp = Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
+    runValidators:true
  })
   .then((bootcamp)=>{
+   // console.log(`${bootcamp}`.green)
     res.status(200).json({ success: true, msg: `Update bootcamp ${req.params.id}`, data: bootcamp});
   })
   .catch((err)=>{
@@ -72,9 +74,13 @@ const updateBootcamp = (req, res, next) => {
 // @route   DELETE /api/v1/bootcamp
 // @access  Private
 const deleteBootcamp = (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, msg: `Delete bootcamp ${req.params.id}` });
+  let bootcamp = Bootcamp.findByIdAndDelete(req.params.id)
+  .then((bootcamp)=>{
+    res.status(200).json({ success: true, msg: `Delete bootcamp ${req.params.id}`, data: bootcamp });
+  })
+  .catch((err)=>{
+    console.log(`${err}`.red);
+  })
 };
 
 module.exports = {
