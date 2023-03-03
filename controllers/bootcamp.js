@@ -18,7 +18,7 @@ const createBootcamp = (req, res, next) => {
         .json({ success: true, msg: 'Create a new bootcamp', data: bootcamp });
     })
     .catch((err) => {
-      console.log(`${err}`.red);
+    next(err)
     });
 };
 
@@ -34,7 +34,7 @@ const getBootcamps = (req, res, next) => {
 
   })
   .catch((err)=>{
-    console.log(`${err}`.red);
+    next(err)
   })
 };
 // @desc    Get single bootcamp
@@ -49,7 +49,7 @@ const getBootcampSingle = (req, res, next) => {
     res.status(200).json({ success: true, data: bootcamp});
   })
   .catch((err)=>{
-    console.log(`${err}`.red);
+    next(err)
   })
 };
 
@@ -66,7 +66,7 @@ const updateBootcamp = (req, res, next) => {
     res.status(200).json({ success: true, msg: `Update bootcamp ${req.params.id}`, data: bootcamp});
   })
   .catch((err)=>{
-    console.log(`${err}`.red);
+    next(err)
   })
 };
 
@@ -79,7 +79,7 @@ const deleteBootcamp = (req, res, next) => {
     res.status(200).json({ success: true, msg: `Delete bootcamp ${req.params.id}`, data: bootcamp });
   })
   .catch((err)=>{
-    console.log(`${err}`.red);
+    next(err)
   })
 };
 
