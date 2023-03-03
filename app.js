@@ -1,17 +1,20 @@
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose')
-require("./models/sample")
-const sampleRouter = require('./routes/sample')
+
+// all models
+const Bootcamp = require("./models/bootcamp");
+
+// all router
 const dotenv = require("dotenv");
 const bootcampRouter = require("./routes/bootcamp");
-// const logger = require('./middlewears/logger.js')
 const colors = require('colors')
 const morgan = require("morgan");
+
 dotenv.config({ path: "./config/.env" });
 let port = process.env.PORT || 5000;
 
-let mongourl = process.env.MONGO_URL || "mongodb://localhost:27017/bootcamp"
+let mongourl = process.env.MONGO_URL || "mongodb://localhost:27017/practicum"
 
 // connect mongodb:
 mongoose.connect(mongourl, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -34,7 +37,6 @@ if (process.env.NODE_ENV == `development`) {
 }
 // app.use(morgan("combined"))
 app.use("/api/v1/bootcamp/", bootcampRouter);
-app.use('/sample/', sampleRouter)
 
 app.listen(port, () => {
   console.log(
