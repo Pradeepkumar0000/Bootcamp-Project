@@ -4,7 +4,7 @@
   "description": "This is Bootcamp Backend",
   "main": "app.js",
   "scripts": {
-    "start": "set NODE_ENV = production mode & node app.js",
+    "start": "set NODE_ENV=production & node app.js",
     "dev": "nodemon app.js"
   },
   "keywords": [],
