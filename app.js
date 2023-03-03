@@ -3,13 +3,17 @@ const app = express();
 const mongoose = require('mongoose')
 
 // all models
-const Bootcamp = require("./models/bootcamp");
+const Bootcamp = require('./models/bootcamp');
 
 // all router
-const dotenv = require("dotenv");
-const bootcampRouter = require("./routes/bootcamp");
+const bootcampRouter = require('./routes/bootcamp');
+
+// custom all middlewears
+const errorHandler = require('./middlewares/errorHandler');
+
+const dotenv = require('dotenv');
 const colors = require('colors')
-const morgan = require("morgan");
+const morgan = require('morgan');
 
 dotenv.config({ path: "./config/.env" });
 let port = process.env.PORT || 5000;
@@ -30,13 +34,9 @@ mongoose.connection.on("error", (err) => {
 });
 
 app.use(express.json()); //to parse json data
-if (process.env.NODE_ENV == `development`) {
-  app.use(morgan("dev")); // to use logger middleware
-} else if (process.env.NODE_ENV=`production`) {
-  app.use(morgan("combined")); // to use logger middleware
-}
-// app.use(morgan("combined"))
+process.env.NODE_ENV == `development` ? app.use(morgan("dev")) : app.use(morgan("combined"));
 app.use("/api/v1/bootcamp/", bootcampRouter);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(
