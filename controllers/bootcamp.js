@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bootcamp = require("../models/bootcamp");
 const Bootcamp = require("../models/bootcamp");
 const colors = require("colors");
-const bootcamp = require("../models/bootcamp");
+// const bootcamp = require("../models/bootcamp");
 
 
 // @desc     Create new bootcamp
