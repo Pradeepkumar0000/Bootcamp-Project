@@ -76,6 +76,7 @@ const updateBootcamp = (req, res, next) => {
 const deleteBootcamp = (req, res, next) => {
   let bootcamp = Bootcamp.findByIdAndDelete(req.params.id)
   .then((bootcamp)=>{
+    // console.log(`${bootcamp}`.green)
     res.status(200).json({ success: true, msg: `Delete bootcamp ${req.params.id}`, data: bootcamp });
   })
   .catch((err)=>{
